@@ -50,8 +50,8 @@ const Body = () => {
     let a = window.confirm("Are You Sure U Wanna Clear The List??");
     if (a) {
       settodos([]);
-      sL();
     }
+    sL();
   };
 
   const handlecheck = (e) => {
@@ -151,7 +151,6 @@ const Body = () => {
                       <span className="hidden md:block">Delete</span>{" "}
                       {/* Text (large screens) */}
                     </button>
-                    {sL()}
                   </div>
                 </div>
               );
