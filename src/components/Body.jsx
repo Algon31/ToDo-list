@@ -8,17 +8,17 @@ const Body = () => {
   const [todos, settodos] = useState([]);
 
   useEffect(() => {
-    let strin = localStorage.getItem("todos");
-    if (strin) {
-      let todos = JSON.parse(localStorage.getItem("todos"));
-      settodos(todos);
+    const storedTodos = localStorage.getItem("todos");
+    if (storedTodos) {
+      settodos(JSON.parse(storedTodos));
     }
-    sL();
   }, []);
 
-  const sL = (e) => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  };
+  useEffect(() => {
+    if (todos.length > 0) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+  }, [todos]);
 
   const handleChange = (e) => {
     settodo(e.target.value);
@@ -27,7 +27,6 @@ const Body = () => {
     if (todo) {
       settodos([...todos, { id: uuidv4(), todo, iscompleted: false }]);
       settodo("");
-      sL();
     } else {
       alert("Enter a task!");
     }
@@ -37,21 +36,18 @@ const Body = () => {
     // console.log(st);
     settodo(st[0].todo);
     handleDelete(id);
-    sL();
   };
   const handleDelete = (id) => {
     let newT = todos.filter((item) => {
       return item.id !== id;
     });
     settodos(newT);
-    sL();
   };
   const handleClear = () => {
     let a = window.confirm("Are You Sure U Wanna Clear The List??");
     if (a) {
       settodos([]);
     }
-    sL();
   };
 
   const handlecheck = (e) => {
@@ -62,7 +58,6 @@ const Body = () => {
     let newT = [...todos];
     newT[index].iscompleted = !newT[index].iscompleted;
     settodos(newT);
-    sL();
   };
 
   return (
@@ -115,7 +110,7 @@ const Body = () => {
               return (
                 <div
                   key={item.id}
-                  className="flex items-center gap-6 bg-amber-300 rounded-sm my-1  justify-between p-2"
+                  className="flex items-center gap-6 bg-amber-300 rounded-sm my-1 w-full justify-between p-2 break-words"
                 >
                   <div className="flex gap-1.5 justify-center">
                     <input
