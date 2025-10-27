@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { createClient } = require('redis');
 
-const client = createClient();
+const client = createClient({ url: process.env.REDIS_URL });
 client.connect();
 
 const REDIS_KEY = "todos";
