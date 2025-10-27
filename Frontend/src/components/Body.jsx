@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-const API = process.env.REACT_APP_API; // .env should define REACT_APP_API // Change if your backend runs elsewhere
+const API = "https://todolist-a40y.onrender.com"; // should not be here
 
 const Body = () => {
   const [todo, settodo] = useState("");
